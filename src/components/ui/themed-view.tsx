@@ -9,12 +9,12 @@ type ThemedSafeAreaProps = SafeAreaViewProps & ThemeProps;
 export default function ThemedView({ children, style, variant = 'primary', ...props }: ThemedViewProps) {
     const theme = useColorScheme() ?? "light";
     return (
-        <View style={[style, { backgroundColor: COLORS[theme].background[variant] }]} {...props}  >{children}</View>
+        <View style={[{ backgroundColor: COLORS[theme].background[variant] }, style]} {...props}  >{children}</View>
     )
 }
 export function ThemedSafeAreaView({ children, style, variant = 'primary', ...props }: ThemedSafeAreaProps) {
     const theme = useColorScheme() ?? "light";
     return (
-        <SafeAreaView style={[style, { backgroundColor: COLORS[theme].background[variant] }]} {...props}  >{children}</SafeAreaView>
+        <SafeAreaView style={[{ backgroundColor: COLORS[theme].background[variant] }, style]} {...props}  >{children}</SafeAreaView>
     )
 }

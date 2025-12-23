@@ -1,18 +1,101 @@
-import TextBody from "./ui/text-body";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { Image } from "expo-image";
+import { useRouter } from "expo-router";
+import { Alert, StyleSheet, useColorScheme } from "react-native";
+import { COLORS } from "./constants/colors";
+import Button from "./ui/Button";
 import TextHeader from "./ui/text-header";
 import { ThemedSafeAreaView } from "./ui/themed-view";
 
+
+const blurhash =
+    '|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';
+
 export default function Home() {
+    const theme = useColorScheme() ?? "light";
+    const router = useRouter();
+
+    // const [modalVisible, setModalVisibility] = useState(false);
+
     return (
-        <ThemedSafeAreaView variant="secondary" style={{
-            flex : 1,
-            justifyContent : 'center',
-            alignItems : "center",
+        <ThemedSafeAreaView style={{
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: "center",
+            paddingHorizontal: 60,
+            gap: 8,
         }}>
-            <TextHeader header="header1">Header</TextHeader>
-            <TextHeader header="header2">Header2</TextHeader>
-            <TextHeader header="header3">Header3</TextHeader>
-            <TextBody>Hi, Mehdi , Hello world</TextBody>
-        </ThemedSafeAreaView>
+            <Image
+                style={styles.image}
+                source={require("@assets/images/icon.png")}
+                placeholder={{ blurhash }}
+                contentFit='contain'
+                transition={1000}
+            />
+            <TextHeader header="header1">Taxi App</TextHeader>
+            <Button style={{ ...styles.button }} onPress={() => {
+                router.push('/start-journey-modal')
+            }
+            }>
+                <TextHeader style={{
+                    color: COLORS[theme].text.secondary,
+                    textAlign: 'center'
+                }} header="header3"> Commencer la journée </TextHeader>
+            </Button>
+            <Button style={{ ...styles.button }} onPress={() => {
+                Alert.alert("Test");
+            }
+            }>
+                <TextHeader style={{
+                    color: COLORS[theme].text.secondary,
+                    textAlign: 'center'
+                }} header="header3"> Historique des journées </TextHeader>
+            </Button>
+            <Button style={{ ...styles.button }} onPress={() => {
+                Alert.alert("Test");
+            }
+            }>
+                <MaterialIcons style={
+                    {
+                        color: COLORS[theme].text.secondary
+                    }
+                } size={20} name='logout' />
+                <TextHeader style={{
+                    color: COLORS[theme].text.secondary,
+                    textAlign: 'center'
+                }} header="header3"> Déconnexion </TextHeader>
+            </Button>
+            {/* Just for trying */}
+            {/* TODO : The modal is corrupted since I extract the modal out of the form, Hint : I don't see the flex-end justify */}
+            {/* <Button style={{ ...styles.button }} onPress={() => setModalVisibility(true)}>
+                <TextHeader header="header3"> Commencer la journée </TextHeader>
+            </Button>
+                <Modal
+                visible={modalVisible}
+                animationType="slide"
+                transparent
+                onRequestClose={() => {
+                    setModalVisibility(false);
+                }}>
+                <StartJourneyForm />
+            </Modal> */}
+        </ThemedSafeAreaView >
     )
 }
+
+
+const styles = StyleSheet.create({
+    image: {
+        width: 150,
+        height: 150,
+        borderRadius: 20,
+    },
+    button: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 10,
+        borderWidth: 2,
+        borderRadius: 20,
+    }
+})
