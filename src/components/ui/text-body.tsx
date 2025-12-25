@@ -1,9 +1,9 @@
-import { TextProps, TextStyle } from "react-native";
-import ThemedText from "./themed-text";
+import { TextStyle } from "react-native";
+import ThemedText, { ThemedTextProps } from "./themed-text";
 
 
 
-export default function TextBody({ children, style, ...props }: TextProps) {
+export default function TextBody({ children, style, ...props }: ThemedTextProps) {
     return (
         <ThemedText style={[bodyStyle, style]} {...props} >
             {children}

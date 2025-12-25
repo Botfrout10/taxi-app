@@ -2,7 +2,7 @@ import React from "react";
 import { Pressable, PressableProps, PressableStateCallbackType, useColorScheme, ViewStyle } from "react-native";
 import { COLORS, ThemeProps } from "../constants/colors";
 
-type ButtonProps = PressableProps & ThemeProps;
+type ButtonProps = Omit<PressableProps, 'accessibilityRole' | 'hitSlop'> & ThemeProps;
 
 
 
@@ -15,7 +15,10 @@ export default function Button({ style, variant = 'primary', children, ...props 
             : [themeStyle, buttonStyle, style];
 
     return (
-        <Pressable style={composedStyle} {...props}>
+        <Pressable
+            accessibilityRole="button"
+            hitSlop={8}
+            style={composedStyle} {...props}>
             {children}
         </Pressable>
     );

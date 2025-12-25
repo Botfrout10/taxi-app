@@ -22,8 +22,6 @@ export default function TextHeader({ children, style, header = 'header1', ...pro
         case "header3":
             headerStyleVariant = header3Style;
             break;
-        default:
-            throw new Error("Invalid Text Header variant");
     }
     return (
         <ThemedText style={[headerStyle, headerStyleVariant, style]} {...props} >
@@ -40,11 +38,11 @@ const headerStyle = {
 
 const header1Style = {
     fontSize: 44,
-    fontWeight: 'regular',
+    fontWeight: 'normal',
 } satisfies TextStyle;
 const header2Style = {
     fontSize: 30,
-    fontWeight: 'regular',
+    fontWeight: 'normal',
     textTransform: 'uppercase',
 } satisfies TextStyle;
 const header3Style = {

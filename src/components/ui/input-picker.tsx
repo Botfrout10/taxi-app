@@ -3,8 +3,8 @@ import { StyleSheet, useColorScheme } from "react-native";
 import { COLORS } from "../constants/colors";
 import { FONT } from "../constants/font";
 
-type InputPiCkerProps = Omit<PickerProps, 'dropDownIconColor' & 'style'> & {
-    items: Array<string>
+type InputPiCkerProps = Omit<PickerProps, 'dropDownIconColor' | 'style'> & {
+    items: string[]
 }
 // TODO : Remove the picker dependency and create one using pageSheet modal
 export default function InputPicker({ items, ...props }: InputPiCkerProps) {
@@ -25,6 +25,7 @@ export default function InputPicker({ items, ...props }: InputPiCkerProps) {
                         style={
                             styles.pickerItem
                         }
+                        key={car}
                         label={car} value={car} />
                 )
             }

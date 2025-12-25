@@ -1,12 +1,13 @@
 import { StyleSheet, TextInput, TextInputProps, useColorScheme, ViewProps, ViewStyle } from "react-native";
-import { COLORS } from "../constants/colors";
+import { COLORS, ThemeProps } from "../constants/colors";
 import { FONT } from "../constants/font";
 import ThemedView from "./themed-view";
 
-export function InputContainer({ style, children, ...props }: ViewProps) {
+type InputContianerProps = ViewProps & ThemeProps;
+export function InputContainer({ style, children, variant = 'primary', ...props }: InputContianerProps) {
     const theme = useColorScheme() ?? 'light';
     const themeStyle = {
-        backgroundColor: COLORS[theme].text.primary,
+        backgroundColor: COLORS[theme].text[variant],
     } satisfies ViewStyle
     return (
         <ThemedView style={[style, styles.input, themeStyle]}>

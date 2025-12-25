@@ -8,6 +8,7 @@ import { InputContainer } from "./input-text";
 import TextBody from "./text-body";
 
 export default function TimeInput() {
+
     const theme = useColorScheme() ?? 'light';
 
     const [date, setDate] = useState<Date>();
@@ -25,7 +26,7 @@ export default function TimeInput() {
                     fontSize: FONT.fontSize,
                     fontWeight: FONT.fontWeight,
                 }
-            } >{date?.toLocaleTimeString()}</TextBody>
+            } >{date?.toLocaleTimeString() ?? new Date(Date.now()).toLocaleTimeString()}</TextBody>
             <Pressable onPress={() => setShow(true)}>
                 <MaterialIcons style={
                     {

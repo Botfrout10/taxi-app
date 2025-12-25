@@ -1,6 +1,8 @@
+import { CARS } from "@/components/constants/cars-selection";
 import { COLORS } from "@/components/constants/colors";
+import { SPACING } from "@/components/constants/spacing";
 import Button from "@/components/ui/Button";
-import InputPicker from "@/components/ui/Input-picker";
+import InputPicker from "@/components/ui/input-picker";
 import Input from "@/components/ui/input-text";
 import TextHeader from "@/components/ui/text-header";
 import ThemedView, { ThemedSafeAreaView } from "@/components/ui/themed-view";
@@ -9,17 +11,12 @@ import { useRouter } from "expo-router";
 import { useState } from "react";
 import { StyleSheet, useColorScheme } from "react-native";
 
-const CARS = [
-    "Volvo",
-    "BMW",
-    "Mercedes"
-]
 
 function SubmitButton() {
     const theme = useColorScheme() ?? 'light'
     const { push } = useRouter()
     return (
-        <Button style={{ ...styles.button }} onPress={() => push('/(tabs)/courses')}
+        <Button accessibilityLabel="start-journey" accessibilityHint="start-journey" style={{ ...styles.button }} onPress={() => push('/(tabs)/courses')}
         >
             <TextHeader style={{
                 color: COLORS[theme].text.secondary
@@ -62,7 +59,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     inputContainer: {
-        gap: 8,
+        gap: SPACING.sm,
         flexDirection: 'column'
     },
     button: {
