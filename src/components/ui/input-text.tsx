@@ -35,7 +35,6 @@ export default function Input({ style, ...props }: TextInputProps) {
 
 const styles = StyleSheet.create({
     input: {
-        // borderWidth: 2,
         borderRadius: 15,
         width: '100%',
         height: 50,

@@ -1,5 +1,13 @@
 export const CARS = [
     "Volvo",
     "BMW",
-    "Mercedes"
+    "Mercedes",
+    "Audi",
+    "Honda",
+    "Toyota",
+    "Ford",
+    "Nissan",
+    "Chevrolet",
+    "Kia",
+
 ]

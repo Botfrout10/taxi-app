@@ -2,7 +2,7 @@ import { CARS } from "@/components/constants/cars-selection";
 import { COLORS } from "@/components/constants/colors";
 import { SPACING } from "@/components/constants/spacing";
 import Button from "@/components/ui/Button";
-import InputPicker from "@/components/ui/input-picker";
+import InputPicker, { InputPickerModal } from "@/components/ui/input-picker";
 import Input from "@/components/ui/input-text";
 import TextHeader from "@/components/ui/text-header";
 import ThemedView, { ThemedSafeAreaView } from "@/components/ui/themed-view";
@@ -36,6 +36,13 @@ export default function Form() {
                     selectedValue={selectedCar}
                     onValueChange={(item) => selectCar(String(item))}
                     items={CARS}
+                />
+                <InputPickerModal
+                    items={CARS}
+                    value={selectedCar}
+                    onChange={selectCar}
+                    title="Select a car"
+                    placeholder="Choose a car"
                 />
                 <TimeInput />
                 <Input

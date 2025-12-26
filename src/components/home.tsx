@@ -3,6 +3,7 @@ import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import { Alert, StyleSheet, useColorScheme } from "react-native";
 import { COLORS } from "./constants/colors";
+import { SPACING } from "./constants/spacing";
 import Button from "./ui/Button";
 import TextHeader from "./ui/text-header";
 import { ThemedSafeAreaView } from "./ui/themed-view";
@@ -23,7 +24,7 @@ export default function Home() {
             justifyContent: 'center',
             alignItems: "center",
             paddingHorizontal: 60,
-            gap: 8,
+            gap: SPACING.sm,
         }}>
             <Image
                 style={styles.image}
@@ -33,7 +34,7 @@ export default function Home() {
                 transition={1000}
             />
             <TextHeader header="header1">Taxi App</TextHeader>
-            <Button style={{ ...styles.button }} onPress={() => {
+            <Button accessibilityLabel="open-start-journey-form" accessibilityHint="open-start-journey-form" style={{ ...styles.button }} onPress={() => {
                 router.push('/start-journey-modal')
             }
             }>
