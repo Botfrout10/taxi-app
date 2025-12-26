@@ -4,21 +4,24 @@ import { FONT } from "../constants/font";
 import ThemedView from "./themed-view";
 
 type InputContianerProps = ViewProps & ThemeProps;
+type InputProps = TextInputProps & {
+    containerStyle?: ViewStyle;
+};
 export function InputContainer({ style, children, variant = 'primary', ...props }: InputContianerProps) {
     const theme = useColorScheme() ?? 'light';
     const themeStyle = {
         backgroundColor: COLORS[theme].text[variant],
     } satisfies ViewStyle
     return (
-        <ThemedView style={[style, styles.input, themeStyle]}>
+        <ThemedView style={[styles.input, themeStyle, style]}>
             {children}
         </ThemedView>)
 }
 
-export default function Input({ style, ...props }: TextInputProps) {
+export default function Input({ style, containerStyle, ...props }: InputProps) {
     const theme = useColorScheme() ?? 'light';
     return (
-        <InputContainer>
+        <InputContainer style={containerStyle}>
             <TextInput
                 {...props}
                 style={[

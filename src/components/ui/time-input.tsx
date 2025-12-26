@@ -7,7 +7,7 @@ import { FONT } from "../constants/font";
 import { InputContainer } from "./input-text";
 import TextBody from "./text-body";
 
-export default function TimeInput() {
+export default function TimeInput({placholder} : {placholder? : string}) {
 
     const theme = useColorScheme() ?? 'light';
 
@@ -26,7 +26,7 @@ export default function TimeInput() {
                     fontSize: FONT.fontSize,
                     fontWeight: FONT.fontWeight,
                 }
-            } >{date?.toLocaleTimeString() ?? new Date(Date.now()).toLocaleTimeString()}</TextBody>
+            } >{date?.toLocaleTimeString() ?? placholder ?? new Date(Date.now()).toLocaleTimeString()}</TextBody>
             <Pressable onPress={() => setShow(true)}>
                 <MaterialIcons style={
                     {

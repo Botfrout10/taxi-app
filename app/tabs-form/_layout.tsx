@@ -11,6 +11,9 @@ export default function FormsLayout() {
             }}
         >
             <Stack.Screen name="course-form" />
+            <Stack.Screen name="pause-form" />
+            <Stack.Screen name="note-form" />
+            <Stack.Screen name="frais-form" />
         </Stack>
     )
 }

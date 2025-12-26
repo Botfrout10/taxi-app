@@ -38,8 +38,8 @@ export default function PauseCard({ pause }: { pause: Pause }) {
               <ThemedView variant="secondary" style={styles.rightCol}>
                 <ThemedText variant="secondary" style={[styles.meta, { textAlign: 'right' }]}>Time</ThemedText>
                 <ThemedView variant="secondary" style={styles.timeRow}>
-                  <Ionicons name='time' size={24} style={styles.timerIcon} />
                   <ThemedText variant="secondary" style={styles.fare}>{formatDuration(pause?.time)}</ThemedText>
+                  <Ionicons name='time' size={24} style={styles.timerIcon} />
                 </ThemedView>
               </ThemedView>
             </ThemedView>

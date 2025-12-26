@@ -13,7 +13,7 @@ export default function FraisPage() {
                 options={{
                     headerShown: false
                 }} />
-            <ShowFormButton path='/tabs-form/frais-form' />
+            <ShowFormButton path='/tabs-form/pause-form' />
             <TabsTemplate >
                 <FlatList
                     showsVerticalScrollIndicator={false}
