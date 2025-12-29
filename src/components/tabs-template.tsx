@@ -8,10 +8,11 @@ import TextHeader from "./ui/text-header"
 import ThemedView, { ThemedSafeAreaView } from "./ui/themed-view"
 
 type Props = {
+    total?: string;
     children: ReactElement;
 }
 
-export default function TabsTemplate({ children }: Props) {
+export default function TabsTemplate({ total, children }: Props) {
     const router = useRouter()
     const route = useRoute()
     return (
@@ -40,6 +41,9 @@ export default function TabsTemplate({ children }: Props) {
                     <TextBody variant='secondary'>Fin de journée</TextBody>
                 </Button>
             </ThemedView>
+            {
+                (!total || total.trim() === "") ? null : <TextBody>{total}</TextBody>
+            }
             {children}
         </ThemedSafeAreaView>)
 }

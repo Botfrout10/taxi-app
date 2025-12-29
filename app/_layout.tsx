@@ -7,6 +7,7 @@ export default function RootLayout() {
   return (
     // <ThemeProvider value={theme === 'dark'  ? DarkTheme : DefaultTheme}>
     <Stack>
+      <Stack.Screen name="index" />
       <Stack.Screen
         name="(tabs)"
         options={{ headerShown: false }}
@@ -21,11 +22,10 @@ export default function RootLayout() {
           sheetAllowedDetents: [0.9],
         }}
       />
-      <Stack.Screen name="index" />
       <Stack.Screen name="start-journey-modal"
         options={{
           sheetGrabberVisible: true,
-          sheetAllowedDetents: [0.90],
+          sheetAllowedDetents: [0.9],
           animation: 'slide_from_bottom',
           presentation: 'formSheet',
           contentStyle: {

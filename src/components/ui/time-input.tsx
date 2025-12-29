@@ -3,11 +3,11 @@ import DateTimePicker, { DateTimePickerEvent } from '@react-native-community/dat
 import { useState } from "react";
 import { Pressable, StyleSheet, useColorScheme } from "react-native";
 import { COLORS } from "../constants/colors";
-import { FONT } from "../constants/font";
+import { FONT, PLACEHOLDER } from "../constants/font";
 import { InputContainer } from "./input-text";
 import TextBody from "./text-body";
 
-export default function TimeInput({placholder} : {placholder? : string}) {
+export default function TimeInput({ placholder }: { placholder?: string }) {
 
     const theme = useColorScheme() ?? 'light';
 
@@ -20,14 +20,29 @@ export default function TimeInput({placholder} : {placholder? : string}) {
     };
     return (
         <InputContainer style={[styles.timePicker]}>
-            <TextBody style={
-                {
-                    color: COLORS[theme].background.primary,
-                    fontSize: FONT.fontSize,
-                    fontWeight: FONT.fontWeight,
-                }
-            } >{date?.toLocaleTimeString() ?? placholder ?? new Date(Date.now()).toLocaleTimeString()}</TextBody>
-            <Pressable onPress={() => setShow(true)}>
+            <Pressable hitSlop={8} style={[styles.timePicker]} onPress={() => setShow(true)}>
+                <TextBody
+                    style={[
+                        (date == null ? {
+                            // Placeholder style
+                            color: COLORS[theme].text.secondary,
+                            fontSize: PLACEHOLDER.fontSize,
+                            fontWeight: PLACEHOLDER.fontWeight,
+                            opacity: 0.7,
+                        } : {
+                            // Value style
+                            color: COLORS[theme].text.secondary,
+                            fontSize: FONT.fontSize,
+                            fontWeight: FONT.fontWeight,
+                        })]}
+                // style={
+                //     {
+                //         color: COLORS[theme].background.primary,
+                //         fontSize: FONT.fontSize,
+                //         fontWeight: FONT.fontWeight,
+                //     }   
+                // }
+                >{date?.toLocaleTimeString() ?? placholder ?? new Date(Date.now()).toLocaleTimeString()}</TextBody>
                 <MaterialIcons style={
                     {
                         color: COLORS[theme].background.primary,
@@ -52,6 +67,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+        width: "100%"
         // borderWidth: 2,
     },
 })

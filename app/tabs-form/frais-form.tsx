@@ -1,10 +1,10 @@
 import { COLORS } from "@/components/constants/colors";
 import { SPACING } from "@/components/constants/spacing";
 import Button from "@/components/ui/Button";
+import { InputPickerModal } from "@/components/ui/input-picker";
 import Input from "@/components/ui/input-text";
 import TextHeader from "@/components/ui/text-header";
 import ThemedView, { ThemedSafeAreaView } from "@/components/ui/themed-view";
-import TimeInput from "@/components/ui/time-input";
 import { Alert, StyleSheet, useColorScheme } from "react-native";
 
 
@@ -26,9 +26,9 @@ export default function FraisForm() {
         <ThemedSafeAreaView style={styles.container}>
             {/* Inputs */}
             <ThemedView style={styles.inputContainer}>
-                <TimeInput />
+                <InputPickerModal items={["Carburant", "Lavage","Frais divers"]} />
                 <Input
-                    placeholder="Todo..."
+                    placeholder="Montant (CHF)"
                     keyboardType='number-pad'
                     maxLength={12}
                 />

@@ -2,7 +2,7 @@ import { CARS } from "@/components/constants/cars-selection";
 import { COLORS } from "@/components/constants/colors";
 import { SPACING } from "@/components/constants/spacing";
 import Button from "@/components/ui/Button";
-import InputPicker, { InputPickerModal } from "@/components/ui/input-picker";
+import { InputPickerModal } from "@/components/ui/input-picker";
 import Input from "@/components/ui/input-text";
 import TextHeader from "@/components/ui/text-header";
 import ThemedView, { ThemedSafeAreaView } from "@/components/ui/themed-view";
@@ -32,22 +32,28 @@ export default function Form() {
         <ThemedSafeAreaView style={styles.container}>
             {/* Inputs */}
             <ThemedView style={styles.inputContainer}>
-                <InputPicker
+                {/* <InputPicker
                     selectedValue={selectedCar}
                     onValueChange={(item) => selectCar(String(item))}
                     items={CARS}
-                />
+                /> */}
                 <InputPickerModal
                     items={CARS}
                     value={selectedCar}
                     onChange={selectCar}
                     title="Select a car"
-                    placeholder="Choose a car"
+                    placeholder="Vehicule"
                 />
-                <TimeInput />
+                <TimeInput placholder="Heure" />
                 <Input
                     keyboardType='number-pad'
                     maxLength={12}
+                    placeholder="Début compteur"
+                    />
+                <Input
+                    keyboardType='number-pad'
+                    maxLength={12}
+                    placeholder="Début tachygraphe"
                 />
             </ThemedView>
             {/* Submit Button */}

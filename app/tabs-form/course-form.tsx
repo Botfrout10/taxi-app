@@ -6,30 +6,24 @@ import Input from "@/components/ui/input-text";
 import TextHeader from "@/components/ui/text-header";
 import ThemedView, { ThemedSafeAreaView } from "@/components/ui/themed-view";
 import TimeInput from "@/components/ui/time-input";
-import { Alert, StyleSheet, useColorScheme } from "react-native";
+import { useState } from "react";
+import { StyleSheet, useColorScheme } from "react-native";
 
 
-function SubmitButton() {
-    const theme = useColorScheme() ?? 'light'
-    return (
-        <Button accessibilityLabel="add-course" accessibilityHint="add-course" style={{ ...styles.button }} onPress={() => Alert.alert("Test")}
-        >
-            <TextHeader style={{
-                color: COLORS[theme].text.secondary
-            }} header="header3"> Ajouter </TextHeader>
-        </Button>
-    )
-}
 
 export default function CourseForm() {
+    const theme = useColorScheme() ?? 'light'
+    const [state, set] = useState<string | undefined>(undefined)
 
     return (
         <ThemedSafeAreaView style={styles.container}>
             {/* Inputs */}
             <ThemedView style={styles.inputContainer}>
-                <InputPickerModal items={['Course Compteur', 'Course normal', 'Course test']} />
-                <TimeInput placholder="Heure compteur" />
+                <InputPickerModal placeholder="Choisir Course" items={['Compteur', 'Forfait']} />
+                <TimeInput placholder="Heure course" />
                 <Input
+                    value={state}
+                    onChangeText={(value) => set(value)}
                     placeholder="Départ"
                     keyboardType='default'
                 />
@@ -41,11 +35,16 @@ export default function CourseForm() {
                     placeholder="Montant (CHF)"
                     keyboardType='number-pad'
                 />
-                <InputPickerModal items={['Paiement cash', 'CB', 'Monnaie']} />
+                <InputPickerModal items={['Paiement cash', 'CB', 'Twint', 'Crédit']} />
             </ThemedView>
             {/* Submit Button */}
             <ThemedView>
-                <SubmitButton />
+                <Button accessibilityLabel="add-course" accessibilityHint="add-course" style={{ ...styles.button }} onPress={null}
+                >
+                    <TextHeader style={{
+                        color: COLORS[theme].text.secondary
+                    }} header="header3"> Ajouter </TextHeader>
+                </Button>
             </ThemedView>
         </ThemedSafeAreaView>
     )

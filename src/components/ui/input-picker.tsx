@@ -2,7 +2,7 @@ import { Picker, PickerProps } from "@react-native-picker/picker";
 import { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, Text, useColorScheme } from "react-native";
 import { COLORS } from "../constants/colors";
-import { FONT } from "../constants/font";
+import { FONT, PLACEHOLDER } from "../constants/font";
 import Button from "./Button";
 import { InputContainer } from "./input-text";
 import ModalBottom from "./modal-bottom";
@@ -108,15 +108,32 @@ export function InputPickerModal({
                 >
                     <TextHeader
                         variant="secondary"
-                        style={{
-                            fontSize: FONT.fontSize,
-                            fontWeight: FONT.fontWeight,
-                        }}
+                        // style={{
+                        //     fontSize: FONT.fontSize,
+                        //     fontWeight: FONT.fontWeight,
+                        //     ...(selected == null ? {
+                        //         color: COLORS[theme].text.secondary,
+                        //         fontSize: PLACEHOLDER.fontSize,
+                        //         fontWeight : PLACEHOLDER.fontWeight,
+                        //         opacity: 0.7,
+                        //     } : null)
+                        // }}
+                        style={[
+                            (selected == null ? {
+                                // Placeholder style
+                                fontSize: PLACEHOLDER.fontSize,
+                                fontWeight: PLACEHOLDER.fontWeight,
+                                opacity: 0.7,
+                            } : {
+                                // Value style
+                                fontSize: FONT.fontSize,
+                                fontWeight: FONT.fontWeight,
+                            })]}
                     >
                         {selected ?? placeholder ?? 'Select...'}
                     </TextHeader>
                 </InputContainer>
-            </Button>
+            </Button >
 
             <ModalBottom
                 visible={modalVisible}

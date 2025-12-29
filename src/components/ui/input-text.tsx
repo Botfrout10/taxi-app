@@ -1,10 +1,10 @@
 import { StyleSheet, TextInput, TextInputProps, useColorScheme, ViewProps, ViewStyle } from "react-native";
 import { COLORS, ThemeProps } from "../constants/colors";
-import { FONT } from "../constants/font";
+import { FONT, PLACEHOLDER } from "../constants/font";
 import ThemedView from "./themed-view";
 
 type InputContianerProps = ViewProps & ThemeProps;
-type InputProps = TextInputProps & {
+type InputProps = Omit<TextInputProps, 'placeholderTextColor'> & {
     containerStyle?: ViewStyle;
 };
 export function InputContainer({ style, children, variant = 'primary', ...props }: InputContianerProps) {
@@ -13,23 +13,31 @@ export function InputContainer({ style, children, variant = 'primary', ...props 
         backgroundColor: COLORS[theme].text[variant],
     } satisfies ViewStyle
     return (
-        <ThemedView style={[styles.input, themeStyle, style]}>
+        <ThemedView style={[styles.input, themeStyle, style]} {...props}>
             {children}
         </ThemedView>)
 }
 
-export default function Input({ style, containerStyle, ...props }: InputProps) {
+export default function Input({ style, containerStyle, value, ...props }: InputProps) {
     const theme = useColorScheme() ?? 'light';
     return (
         <InputContainer style={containerStyle}>
             <TextInput
                 {...props}
+                placeholderTextColor={COLORS[theme].text.secondary}
                 style={[
-                    {
-                        color: COLORS[theme].text.secondary,
+                    { color: COLORS[theme].text.secondary },
+                    (value == null ? {
+                        // Placeholder style
+                        fontSize: PLACEHOLDER.fontSize,
+                        fontWeight: PLACEHOLDER.fontWeight,
+                        opacity: 0.7,
+                    } : {
+                        // Value style
                         fontSize: FONT.fontSize,
                         fontWeight: FONT.fontWeight,
-                    }, style]
+                    })
+                    , style]
                 } />
         </InputContainer>
     )
