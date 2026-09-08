@@ -1,134 +1,61 @@
 import { Course } from '@/types/course';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import React from 'react';
-import { StyleSheet, useColorScheme, ViewStyle } from 'react-native';
-import { SPACING } from '../constants/spacing';
-import ThemedText from "./themed-text";
-import ThemedView from "./themed-view";
+import { StyleSheet, useColorScheme, View } from 'react-native';
+import { COLORS } from '../constants/colors';
+import ThemedText from './themed-text';
+import ThemedView from './themed-view';
 
 export default function CourseCard({ course }: { course: Course }) {
   const scheme = useColorScheme() ?? 'light';
-  const isDark = scheme === 'dark';
-  const cardShadow = isDark ? {} : styles.shadow;
+  const colors = COLORS[scheme];
 
   return (
-    <ThemedView style={styles.container}>
+    <ThemedView style={[styles.card, { backgroundColor: colors.background.secondary, borderColor: colors.background.border }]}>
+      <View style={styles.topRow}>
+        <View style={[styles.avatar, { backgroundColor: colors.background.accentSoft }]}>
+          <MaterialIcons name="person" size={19} color={colors.background.accent} />
+        </View>
+        <View style={styles.rider}>
+          <ThemedText style={styles.title}>{course?.name ?? 'Alice M.'}</ThemedText>
+          <ThemedText style={[styles.meta, { color: colors.text.gray }]}>Course en cours</ThemedText>
+        </View>
+        <View style={styles.fare}>
+          <ThemedText style={[styles.fareLabel, { color: colors.text.gray }]}>EST.</ThemedText>
+          <ThemedText style={styles.fareValue}>$45.00</ThemedText>
+        </View>
+      </View>
 
-      {/* Card */}
-      <ThemedView style={styles.cardWrap}>
-        <ThemedView variant='secondary' style={[styles.card, cardShadow]}>
-
-
-          {/* Card Content */}
-          <ThemedView variant='secondary' style={styles.content}>
-            <ThemedView variant='secondary' style={styles.rowBetween}>
-              {/* Left: Rider + location */}
-              <ThemedView variant='secondary' style={{ flex: 1 }}>
-                <ThemedView variant='secondary' style={styles.rowCenter}>
-                  <ThemedText variant='secondary' style={[styles.title]}>{course?.name ?? 'Alice M.'}</ThemedText>
-                </ThemedView>
-
-                <ThemedView variant='secondary' style={styles.rowLocation}>
-                  {/* Dot-line stack */}
-                  <ThemedView variant='secondary' style={styles.dotStack}>
-                    <ThemedView style={[styles.smallDot,]} />
-                    <ThemedView style={[styles.vertLine,]} />
-                    <ThemedView style={[styles.smallDot,]} />
-                  </ThemedView>
-
-                  <ThemedView variant='secondary' style={styles.locThemedTextCol}>
-                    <ThemedText variant='secondary' style={[styles.meta,]}>From : Location</ThemedText>
-                    <ThemedText variant='secondary' style={[styles.timerText]}>12 min</ThemedText>
-                    <ThemedText variant='secondary' style={[styles.location]}>To : Heathrow Terminal 5</ThemedText>
-                  </ThemedView>
-                </ThemedView>
-              </ThemedView>
-
-              {/* Right: Fare */}
-              <ThemedView variant='secondary' style={styles.rightCol}>
-                <ThemedText variant='secondary' style={[styles.meta, { textAlign: 'right' }]}>Est. Fare</ThemedText>
-                <ThemedText variant='secondary' style={[styles.fare,]}>$45.00</ThemedText>
-              </ThemedView>
-            </ThemedView>
-
-          </ThemedView>
-        </ThemedView>
-      </ThemedView>
+      <View style={styles.route}>
+        <View style={styles.routeRail}>
+          <View style={[styles.dot, { backgroundColor: colors.background.accent }]} />
+          <View style={[styles.line, { backgroundColor: colors.background.border }]} />
+          <View style={[styles.dot, { backgroundColor: colors.text.primary }]} />
+        </View>
+        <View style={styles.locations}>
+          <View><ThemedText style={[styles.label, { color: colors.text.gray }]}>DÉPART</ThemedText><ThemedText style={styles.location}>Location</ThemedText></View>
+          <View><ThemedText style={[styles.label, { color: colors.text.gray }]}>ARRIVÉE · 12 MIN</ThemedText><ThemedText style={styles.location}>Heathrow Terminal 5</ThemedText></View>
+        </View>
+      </View>
     </ThemedView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-  },
-  cardWrap: {
-  },
-  card: {
-    borderRadius: 16,
-    borderWidth: 1,
-    overflow: 'hidden',
-  },
-  shadow: {
-    shadowColor: '#000',
-    shadowOpacity: 0.08,
-    shadowRadius: 8,
-    shadowOffset: { width: 0, height: 2 },
-    elevation: 2,
-  },
-  timerText: {
-    fontSize: 12,
-    fontWeight: '700',
-  },
-  content: {
-    padding: 16,
-    paddingTop: 10,
-  },
-  rowBetween: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  rowCenter: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: SPACING.sm,
-    marginBottom: 4,
-  } satisfies ViewStyle,
-  title: {
-    fontSize: 18,
-    fontWeight: '700',
-  },
-  rowLocation: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    gap: SPACING.sm,
-  } satisfies ViewStyle,
-  dotStack: {
-    width: 16,
-    alignItems: 'center',
-  },
-  smallDot: {
-    width: 6, height: 6, borderRadius: 9999,
-  },
-  vertLine: {
-    width: 2, height: 40, marginVertical: 2, borderRadius: 1,
-  },
-  locThemedTextCol: {
-    flexDirection: 'column',
-    gap: SPACING.xs,
-  } satisfies ViewStyle,
-  meta: {
-    fontSize: 12,
-  },
-  location: {
-    fontSize: 14,
-    fontWeight: '600',
-  },
-  rightCol: {
-    alignItems: 'flex-end',
-    gap: SPACING.sm,
-  } satisfies ViewStyle,
-  fare: {
-    fontSize: 20,
-    fontWeight: '700',
-    fontFamily: 'monospace',
-  },
+  card: { borderRadius: 20, borderWidth: 1, padding: 16, gap: 16 },
+  topRow: { flexDirection: 'row', alignItems: 'center' },
+  avatar: { width: 42, height: 42, borderRadius: 14, alignItems: 'center', justifyContent: 'center' },
+  rider: { flex: 1, marginLeft: 11, gap: 2 },
+  title: { fontSize: 17, fontWeight: '800' },
+  meta: { fontSize: 12 },
+  fare: { alignItems: 'flex-end', gap: 2 },
+  fareLabel: { fontSize: 9, letterSpacing: 1, fontWeight: '800' },
+  fareValue: { fontSize: 18, fontWeight: '800' },
+  route: { flexDirection: 'row', gap: 12 },
+  routeRail: { width: 14, alignItems: 'center', paddingTop: 5 },
+  dot: { width: 7, height: 7, borderRadius: 99 },
+  line: { width: 1, height: 30, marginVertical: 3 },
+  locations: { flex: 1, gap: 12 },
+  label: { fontSize: 9, letterSpacing: 1, fontWeight: '800' },
+  location: { fontSize: 14, fontWeight: '600', marginTop: 2 },
 });

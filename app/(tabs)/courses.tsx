@@ -9,23 +9,17 @@ import { FlatList } from "react-native";
 export default function CoursesPage() {
     return (
         <>
-            <Tabs.Screen
-                options={{
-                    headerShown: false,
-                }} />
+            <Tabs.Screen options={{ headerShown: false }} />
             <ShowFormButton path='/tabs-form/course-form' />
-            <TabsTemplate >
+            <TabsTemplate title="Courses">
                 <FlatList
                     showsVerticalScrollIndicator={false}
                     data={COURSES}
                     keyExtractor={(item) => String(item.id)}
-                    contentContainerStyle={{
-                        gap: SPACING.lg,
-                    }}
-                    renderItem={({ item: course }) => {
-                        return (<CourseCard course={course} />)
-                    }} />
+                    contentContainerStyle={{ gap: SPACING.sm, paddingBottom: 20 }}
+                    renderItem={({ item }) => <CourseCard course={item} />}
+                />
             </TabsTemplate>
         </>
-    )
+    );
 }

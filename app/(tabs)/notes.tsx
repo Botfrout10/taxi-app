@@ -6,26 +6,14 @@ import { NOTES } from "@/types/notes";
 import { Tabs } from "expo-router";
 import { FlatList } from "react-native";
 
-export default function FraisPage() {
+export default function NotesPage() {
     return (
         <>
-            <Tabs.Screen
-                options={{
-                    headerShown: false
-                }} />
+            <Tabs.Screen options={{ headerShown: false }} />
             <ShowFormButton path='/tabs-form/note-form' />
-            <TabsTemplate >
-                <FlatList
-                    showsVerticalScrollIndicator={false}
-                    data={NOTES}
-                    keyExtractor={(item) => String(item.id)}
-                    contentContainerStyle={{
-                        gap: SPACING.lg,
-                    }}
-                    renderItem={({ item }) => {
-                        return (<NoteCard note={item} />)
-                    }} />
+            <TabsTemplate title="Notes">
+                <FlatList showsVerticalScrollIndicator={false} data={NOTES} keyExtractor={(item) => String(item.id)} contentContainerStyle={{ gap: SPACING.sm, paddingBottom: 20 }} renderItem={({ item }) => <NoteCard note={item} />} />
             </TabsTemplate>
         </>
-    )
+    );
 }
