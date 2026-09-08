@@ -1,40 +1,27 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Href, useRouter } from 'expo-router';
-import { Pressable, useColorScheme } from "react-native";
+import { Pressable, StyleSheet, useColorScheme } from "react-native";
 import { COLORS } from "./constants/colors";
-import ThemedView from "./ui/themed-view";
 
-type ShowFormButtonProps = {
-    path: Href;
-};
+type ShowFormButtonProps = { path: Href };
+
 export default function ShowFormButton({ path }: ShowFormButtonProps) {
     const router = useRouter();
     const theme = useColorScheme() ?? "light";
-
+    const colors = COLORS[theme];
     return (
         <Pressable
-            onPress={() => {
-                router.push(path)
-            }}
-            style={{
-                position: 'absolute',
-                zIndex: 1,
-                width: 60,
-                aspectRatio: 1 / 1,
-                bottom: 10,
-                right: 10,
-                borderRadius: 100,
-                backgroundColor: COLORS[theme].background.secondary,
-                borderWidth : 2,
-                borderColor : COLORS[theme].background.primary,
-                justifyContent: 'center',
-                alignItems: 'center'
-            }}>
-            <ThemedView style={{
-                backgroundColor: COLORS[theme].background.secondary,
-            }}>
-                <Ionicons name='add' size={32} color={COLORS[theme].background.primary} />
-            </ThemedView>
+            accessibilityRole="button"
+            accessibilityLabel="Ajouter"
+            onPress={() => router.push(path)}
+            style={({ pressed }) => [styles.button, { backgroundColor: colors.background.accent, shadowColor: colors.background.black }, pressed && styles.pressed]}
+        >
+            <Ionicons name='add' size={27} color={colors.text.black} />
         </Pressable>
-    )
+    );
 }
+
+const styles = StyleSheet.create({
+    button: { position: 'absolute', zIndex: 10, width: 58, height: 58, bottom: 20, right: 18, borderRadius: 20, justifyContent: 'center', alignItems: 'center', elevation: 5, shadowOpacity: 0.16, shadowRadius: 10, shadowOffset: { width: 0, height: 4 } },
+    pressed: { opacity: 0.78, transform: [{ scale: 0.94 }] },
+});
