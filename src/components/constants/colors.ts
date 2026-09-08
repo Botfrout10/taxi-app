@@ -1,37 +1,44 @@
 export const COLORS = {
    light: {
       background: {
-         primary: '#F5F5F5',
-         secondary: '#001645',
-         black: '#2F2F2F',
-         gray: '#888888',
+         primary: '#F7F8FA',
+         secondary: '#FFFFFF',
+         black: '#111827',
+         gray: '#667085',
+         accent: '#F4B400',
+         accentSoft: '#FFF4CC',
+         border: '#E7E9EE',
       },
       text: {
-         primary: '#001645',
-         secondary: '#F5F5F5',
-         gray: '#888888',
-         black: '#2F2F2F',
+         primary: '#111827',
+         secondary: '#FFFFFF',
+         gray: '#667085',
+         black: '#111827',
+         accent: '#9A6700',
+         border: '#E7E9EE',
       }
    },
    dark: {
       background: {
-         primary: '#001645',    // Deep matte black for the main canvas
-         secondary: '#F5F5F5',  // Lighter, more vibrant blue to pop against dark backgrounds
-         black: '#1E1E1E',      // A slightly lighter grey for "elevated" surfaces/cards
-         gray: '#A0A0A0',  // Dimmed grey for hints and meta-data
+         primary: '#0B0F14',
+         secondary: '#151B23',
+         black: '#F7F8FA',
+         gray: '#98A2B3',
+         accent: '#F4B400',
+         accentSoft: '#332A10',
+         border: '#27303B',
       },
       text: {
-         primary: '#F5F5F5',    // Off-white to reduce eye strain (pure white can be too harsh)
-         secondary: '#001645',  // Dimmed grey for hints and meta-data
-         gray: '#A0A0A0',  // Dimmed grey for hints and meta-data
-         black: '#1E1E1E',      // A slightly lighter grey for "elevated" surfaces/cards
+         primary: '#F7F8FA',
+         secondary: '#0B0F14',
+         gray: '#98A2B3',
+         black: '#F7F8FA',
+         accent: '#FFD666',
+         border: '#27303B',
       }
    },
 }
 
-// type ThemeVariant = keyof typeof COLORS.dark.text
-// 1. Define the custom props shared by both components
 export type ThemeProps = {
-   variant?: keyof typeof COLORS['light']['text']; // Ensures variant matches your color keys
+   variant?: keyof typeof COLORS['light']['text'];
 };
-
