@@ -1,3 +1,4 @@
+import { useColorScheme } from "react-native";
 import { useRouter } from "expo-router";
 import { ReactElement } from "react";
 import { StyleSheet, View } from "react-native";
@@ -10,6 +11,8 @@ type Props = { total?: string; children: ReactElement; title?: string };
 
 export default function TabsTemplate({ total, children, title }: Props) {
     const router = useRouter();
+    const theme = useColorScheme() ?? "light";
+    const colors = COLORS[theme];
     return (
         <ThemedSafeAreaView style={styles.screen}>
             <ThemedView style={styles.header}>
@@ -19,7 +22,7 @@ export default function TabsTemplate({ total, children, title }: Props) {
                 </View>
                 <TextBody variant="accent" style={styles.status}>● Active</TextBody>
             </ThemedView>
-            <ThemedView style={styles.summary}>
+            <ThemedView style={[styles.summary, { borderColor: colors.background.border }]}>
                 <View>
                     <TextBody variant="gray">{total ? "Total du jour" : "Suivi en direct"}</TextBody>
                     {total ? <TextHeader header="header2">{total}</TextHeader> : <TextBody style={styles.summaryHint}>Ajoutez vos opérations au fil de la journée.</TextBody>}
@@ -42,7 +45,7 @@ const styles = StyleSheet.create({
     eyebrow: { fontSize: 10, letterSpacing: 1.3 },
     title: { fontWeight: "800" },
     status: { fontSize: 12, fontWeight: "700" },
-    summary: { borderRadius: 18, padding: 16, flexDirection: "row", justifyContent: "space-between", alignItems: "center", borderWidth: 1, borderColor: COLORS.light.background.border },
+    summary: { borderRadius: 18, padding: 16, flexDirection: "row", justifyContent: "space-between", alignItems: "center", borderWidth: 1 },
     summaryHint: { marginTop: 3 },
     date: { fontSize: 11 },
     content: { flex: 1, paddingTop: 16 },
